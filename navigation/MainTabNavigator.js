@@ -61,7 +61,7 @@ const PaperStack = createStackNavigator({
 });
 
 PaperStack.navigationOptions = {
-  tabBarLabel: 'Paper',
+  tabBarLabel: 'Evaluation',
   tabBarIcon: ({ focused }) => (
       <TabBarIcon
           focused={focused}
@@ -85,9 +85,9 @@ SettingsStack.navigationOptions = {
 };
 
 export default createBottomTabNavigator({
-  HomeStack,
+  // HomeStack,
   // LinksStack,
-  ImageComparisonStack,
-  PaperStack,
-  SettingsStack,
+    ImageComparisonStack,
+    PaperStack,
+    SettingsStack,
 });

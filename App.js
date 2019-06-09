@@ -4,11 +4,17 @@ import { AppRegistry } from 'react-native';
 import { Provider as PaperProvider } from 'react-native-paper';
 import { AppLoading, Asset, Font, Icon } from 'expo';
 import AppNavigator from './navigation/AppNavigator';
+// import { ScreenOrientation } from 'expo';
+
 
 export default class App extends React.Component {
   state = {
     isLoadingComplete: false,
   };
+
+  componentDidMount() {
+    // ScreenOrientation.allowAsync(ScreenOrientation.Orientation.PORTRAIT_DOWN);
+  }
 
   render() {
     if (!this.state.isLoadingComplete && !this.props.skipLoadingScreen) {
