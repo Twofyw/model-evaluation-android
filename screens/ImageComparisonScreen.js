@@ -82,13 +82,13 @@ export default class ImageComparisonScreen extends React.Component {
                                 style={styles.fab_up}
                                 small
                                 icon="arrow-drop-up"
-                                onPress={() => this._handlePagination(true)}
+                                onPress={() => this._handlePagination(false)}
                             />
                             <FAB
                                 style={styles.fab_down}
                                 small
                                 icon="arrow-drop-down"
-                                onPress={() => this._handlePagination(false)}
+                                onPress={() => this._handlePagination(true)}
                             />
                         </Portal>
                     </View>
