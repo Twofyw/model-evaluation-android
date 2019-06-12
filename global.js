@@ -1,4 +1,3 @@
-global.showFAB = true;
 global.datasets = ['road extraction', 'cell isbi 2012'];
 global.raw_url = 'http://249.twofyw.me';
 global.port = '10108';
