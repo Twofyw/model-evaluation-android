@@ -115,8 +115,8 @@ export default class PaperScreen extends React.Component {
                         apls_gt_p = randomizedNumber(apls_gt_p, std, mult);
                         apls = randomizedNumber(apls, std, mult);
                         return (<DataTable.Row key={i}>
-                                {cellSwitch(<DataTable.Cell>{name}</DataTable.Cell>, global.checked[0])}
-                                <DataTable.Cell numeric>{apls_p_gt.toFixed(2)}</DataTable.Cell>
+                                <DataTable.Cell>{name}</DataTable.Cell>
+                                {cellSwitch(<DataTable.Cell numeric>{apls_p_gt.toFixed(2)}</DataTable.Cell>, global.checked[0])}
                                 <DataTable.Cell numeric>{apls_gt_p.toFixed(2)}</DataTable.Cell>
                                 <DataTable.Cell numeric>{apls.toFixed(2)}</DataTable.Cell>
                             </DataTable.Row>
