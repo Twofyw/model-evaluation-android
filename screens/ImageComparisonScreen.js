@@ -58,11 +58,13 @@ export default class ImageComparisonScreen extends React.Component {
             const htmlString = await response.text();     // get response text
             const $ = cheerio.load(htmlString);           // parse HTML string
             entries = $('li a');
-            // entries.map((i, el) => url + el.attribs.href);
             let urls = [];
 
             entries.each((_, el) => {
-                urls.push(el.attribs.href)
+                const url = el.attribs.href;
+                if (!url.endsWith('_binary/')) {
+                    urls.push(url.slice(0,-1))
+                }
             });
             entries = urls;
         }
@@ -76,10 +78,12 @@ export default class ImageComparisonScreen extends React.Component {
 
     _renderPredictions() {
         const items = [];
+        const binaryPath = global.isBinarization? '_binary' : '';
         switch (this.state.dataset) {
             case 'road extraction':
                 for (const [idx, [k, v]] of Object.entries(Object.entries(this.score_path_dict))) {
-                    let p_url = global.base_url + dataset_2_dir[this.state.dataset] + "eval_result/" + v + "/" + this.state.idx.toString() + ".png?a=" + Math.random();
+                    let p_url = global.base_url + dataset_2_dir[this.state.dataset] + "eval_result/" + v + binaryPath +
+                        "/" + this.state.idx.toString() + ".png?a=" + Math.random();
                     items.push(<Card.Title key={idx} subtitle={'Prediction: ' + k}/>);
                     items.push(<Card.Cover style={styles.cover} key={-idx - 1} source={{uri: p_url}}/>);
                 }
@@ -88,7 +92,7 @@ export default class ImageComparisonScreen extends React.Component {
                 // const url = global.base_url + dataset_2_dir[dataset] + "prediction/";
                 for (const [idx, url] of Object.entries(this.state.cell_pred_urls)) {
                     const base_url = global.base_url + dataset_2_dir[this.state.dataset] + "prediction/";
-                    let p_url = base_url + url + this.cell_idx[this.state.idx].toString() + ".png";
+                    let p_url = base_url + url + binaryPath + '/' + this.cell_idx[this.state.idx].toString() + ".png";
                     items.push(<Card.Title key={idx} subtitle={'Prediction: ' + url}/>);
                     items.push(<Card.Cover style={styles.cover} key={-idx - 1} source={{uri: p_url}}/>);
                 }

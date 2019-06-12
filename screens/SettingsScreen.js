@@ -24,7 +24,7 @@ export default class SettingsScreen extends React.Component {
         this.setState({
             mode_of_image: mode,
         });
-        global.isBinarization = mode === 'Binarization Threshold';
+        global.isBinarization = mode === 'Binarize';
     };
 
     render() {
