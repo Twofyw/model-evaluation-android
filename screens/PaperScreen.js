@@ -5,7 +5,11 @@ import DatasetAccordion from '../components/DatasetAccordion';
 
 let randomizedNumber = (number, std, mult) => {
     return mult * number + Math.random() * std - std / 2;
-}
+};
+
+let cellSwitch = (cell, isOn) => {
+    return isOn ? cell : null;
+};
 
 export default class PaperScreen extends React.Component {
     static navigationOptions = {
@@ -92,6 +96,7 @@ export default class PaperScreen extends React.Component {
         })
     };
 
+
     renderTable() {
         const std = 0.02;
         const mult = this.state.dataset === 'cell isbi 2012' ? 1.1 :
@@ -110,7 +115,7 @@ export default class PaperScreen extends React.Component {
                         apls_gt_p = randomizedNumber(apls_gt_p, std, mult);
                         apls = randomizedNumber(apls, std, mult);
                         return (<DataTable.Row key={i}>
-                                <DataTable.Cell>{name}</DataTable.Cell>
+                                {cellSwitch(<DataTable.Cell>{name}</DataTable.Cell>, global.checked[0])}
                                 <DataTable.Cell numeric>{apls_p_gt.toFixed(2)}</DataTable.Cell>
                                 <DataTable.Cell numeric>{apls_gt_p.toFixed(2)}</DataTable.Cell>
                                 <DataTable.Cell numeric>{apls.toFixed(2)}</DataTable.Cell>
