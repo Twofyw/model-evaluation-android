@@ -123,6 +123,7 @@ export default class PaperScreen extends React.Component {
     }
 
     render() {
+        global.showFAB = false;
         return (
             <View style={styles.container}>
                 <ScrollView style={styles.container} contentContainerStyle={styles.contentContainer}>
@@ -146,6 +147,6 @@ const styles = StyleSheet.create({
         backgroundColor: '#fff',
     },
     contentContainer: {
-        paddingTop: 30,
+        // paddingTop: 30,
     },
 });
