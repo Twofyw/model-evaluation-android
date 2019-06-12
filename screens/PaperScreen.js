@@ -3,7 +3,7 @@ import {ScrollView, StyleSheet, View} from 'react-native';
 import {DataTable} from 'react-native-paper';
 import DatasetAccordion from '../components/DatasetAccordion';
 
-let randomizedNumber = (number, std, mult) => {
+let deviateNumber = (number, std, mult) => {
     return mult * number + Math.random() * std - std / 2;
 };
 
@@ -111,14 +111,14 @@ export default class PaperScreen extends React.Component {
                 </DataTable.Header>
                 {this.products.map(
                     ({name, apls_p_gt, apls_gt_p, apls}, i) => {
-                        apls_p_gt = randomizedNumber(apls_p_gt, std, mult);
-                        apls_gt_p = randomizedNumber(apls_gt_p, std, mult);
-                        apls = randomizedNumber(apls, std, mult);
+                        apls_p_gt = deviateNumber(apls_p_gt, std, mult);
+                        apls_gt_p = deviateNumber(apls_gt_p, std, mult);
+                        apls = deviateNumber(apls, std, mult);
                         return (<DataTable.Row key={i}>
-                                {cellSwitch(<DataTable.Cell>{name}</DataTable.Cell>, global.checked[0])}
-                                <DataTable.Cell numeric>{apls_p_gt.toFixed(2)}</DataTable.Cell>
-                                <DataTable.Cell numeric>{apls_gt_p.toFixed(2)}</DataTable.Cell>
-                                <DataTable.Cell numeric>{apls.toFixed(2)}</DataTable.Cell>
+                                <DataTable.Cell>{name}</DataTable.Cell>
+                                {cellSwitch(<DataTable.Cell numeric>{apls_p_gt.toFixed(2)}</DataTable.Cell>, global.checked[0])}
+                                {cellSwitch(<DataTable.Cell numeric>{apls_gt_p.toFixed(2)}</DataTable.Cell>, global.checked[1])}
+                                {cellSwitch(<DataTable.Cell numeric>{apls.toFixed(2)}</DataTable.Cell>, global.checked[2])}
                             </DataTable.Row>
                         );
                     })}
@@ -131,14 +131,14 @@ export default class PaperScreen extends React.Component {
                 </DataTable.Header>
                 {this.products.map(
                     ({name, iou, precision, recall}, i) => {
-                        iou = randomizedNumber(iou, std, mult);
-                        precision = randomizedNumber(precision, std, mult);
-                        recall = randomizedNumber(recall, std, mult);
+                        iou = deviateNumber(iou, std, mult);
+                        precision = deviateNumber(precision, std, mult);
+                        recall = deviateNumber(recall, std, mult);
                         return (<DataTable.Row key={i}>
                             <DataTable.Cell>{name}</DataTable.Cell>
-                            <DataTable.Cell numeric>{iou.toFixed(2)}</DataTable.Cell>
-                            <DataTable.Cell numeric>{precision.toFixed(2)}</DataTable.Cell>
-                            <DataTable.Cell numeric>{recall.toFixed(2)}</DataTable.Cell>
+                                {cellSwitch(<DataTable.Cell numeric>{iou.toFixed(2)}</DataTable.Cell>, global.checked[3])}
+                                {cellSwitch(<DataTable.Cell numeric>{precision.toFixed(2)}</DataTable.Cell>, global.checked[4])}
+                                {cellSwitch(<DataTable.Cell numeric>{recall.toFixed(2)}</DataTable.Cell>, global.checked[5])}
                         </DataTable.Row>);
                     }
                 )}

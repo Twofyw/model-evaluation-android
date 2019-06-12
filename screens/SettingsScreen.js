@@ -51,7 +51,7 @@ export default class SettingsScreen extends React.Component {
                         }}
                     />
                     <Divider/>
-                    <Text style={styles.headerLabel}>Mode of Image</Text>
+                    <Text style={styles.headerLabel2}>Mode of Image</Text>
                     <SetModeOfImageAccordion
                         mode={this.state.mode_of_image}
                         handleSetModeOfImage={this._handleSetModeOfImage}
@@ -85,7 +85,7 @@ export default class SettingsScreen extends React.Component {
                                 this.setState({checked_2: global.checked[2]});}}
 
                     />
-                    <Text style={styles.checkboxLabel}>APLS (Total)</Text>
+                    <Text style={styles.checkboxLabel}>APLS (Overall)</Text>
                     </View>
                     <View style={styles.checkboxRow}>
                     <Checkbox
@@ -134,7 +134,13 @@ const styles = StyleSheet.create({
         paddingTop: 10,
         paddingBottom: 10,
         paddingLeft: 20,
-        fontSize: 20,
+        fontSize: 22,
+    },
+    headerLabel2: {
+        paddingTop: 10,
+        // paddingBottom: 10,
+        paddingLeft: 20,
+        fontSize: 22,
     },
     checkboxRow: {
         // minHeight: 48,
