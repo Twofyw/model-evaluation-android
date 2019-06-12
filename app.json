@@ -1,7 +1,7 @@
 {
   "expo": {
-    "name": "model-evaluation-android",
-    "slug": "model-evaluation-android",
+    "name": "model-evaluation-android-test",
+    "slug": "model-evaluation-android-test",
     "privacy": "public",
     "sdkVersion": "32.0.0",
     "platforms": [
