@@ -142,8 +142,8 @@ export default class PaperScreen extends React.Component {
 const styles = StyleSheet.create({
     container: {
         flex: 1,
-        paddingTop: 15,
-        // backgroundColor: '#fff',
+        // paddingTop: 15,
+        backgroundColor: '#fff',
     },
     contentContainer: {
         paddingTop: 30,

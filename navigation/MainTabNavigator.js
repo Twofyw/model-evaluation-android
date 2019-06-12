@@ -1,6 +1,6 @@
 import React from 'react';
-import { Platform } from 'react-native';
-import { createStackNavigator, createBottomTabNavigator } from 'react-navigation';
+import {Platform} from 'react-native';
+import {createBottomTabNavigator, createStackNavigator} from 'react-navigation';
 
 import TabBarIcon from '../components/TabBarIcon';
 import HomeScreen from '../screens/HomeScreen';
@@ -10,36 +10,37 @@ import PaperScreen from '../screens/PaperScreen';
 import SettingsScreen from '../screens/SettingsScreen';
 
 const HomeStack = createStackNavigator({
-  Home: HomeScreen,
+    Home: HomeScreen,
 });
 
 HomeStack.navigationOptions = {
-  tabBarLabel: 'Home',
-  tabBarIcon: ({ focused }) => (
-    <TabBarIcon
-      focused={focused}
-      name={
-        Platform.OS === 'ios'
-          ? `ios-information-circle${focused ? '' : '-outline'}`
-          : 'md-information-circle'
-      }
-    />
-  ),
+    tabBarLabel: 'Home',
+    tabBarIcon: ({focused}) => (
+        <TabBarIcon
+            focused={focused}
+            name={
+                Platform.OS === 'ios'
+                    ? `ios-information-circle${focused ? '' : '-outline'}`
+                    : 'md-information-circle'
+            }
+        />
+    ),
 };
 
 
-const ImageComparisonStack= createStackNavigator({
-  Links: ImageComparisonScreen,
+const ImageComparisonStack = createStackNavigator({
+    Links: ImageComparisonScreen,
 });
 
 ImageComparisonStack.navigationOptions = {
-  tabBarLabel: 'Image',
-  tabBarIcon: ({ focused }) => (
-      <TabBarIcon
-          focused={focused}
-          name={Platform.OS === 'ios' ? 'ios-link' : 'md-link'}
-      />
-  ),
+    tabBarLabel: 'Visualization',
+    tabBarIcon: ({focused}) => (
+        <TabBarIcon
+            focused={focused}
+            name={Platform.OS === 'ios' ? 'ios-link' : 'md-eye'}
+            // name={'visibility'}
+        />
+    ),
 };
 
 // const LinksStack = createStackNavigator({
@@ -56,37 +57,52 @@ ImageComparisonStack.navigationOptions = {
 //   ),
 // };
 
+// const SwiperStack = createStackNavigator({
+//   Links: SwiperScreen,
+// });
+//
+// SwiperStack.navigationOptions = {
+//   tabBarLabel: 'Links',
+//   tabBarIcon: ({ focused }) => (
+//     <TabBarIcon
+//       focused={focused}
+//       name={Platform.OS === 'ios' ? 'ios-link' : 'md-link'}
+//     />
+//   ),
+// };
+
 const PaperStack = createStackNavigator({
-      Links: PaperScreen,
+    Links: PaperScreen,
 });
 
 PaperStack.navigationOptions = {
-  tabBarLabel: 'Evaluation',
-  tabBarIcon: ({ focused }) => (
-      <TabBarIcon
-          focused={focused}
-          name={Platform.OS === 'ios' ? 'ios-options' : 'md-options'}
-      />
-  ),
-}
+    tabBarLabel: 'Evaluation',
+    tabBarIcon: ({focused}) => (
+        <TabBarIcon
+            focused={focused}
+            name={Platform.OS === 'ios' ? 'ios-options' : 'md-code'}
+        />
+    ),
+};
 
 const SettingsStack = createStackNavigator({
-  Settings: SettingsScreen,
+    Settings: SettingsScreen,
 });
 
 SettingsStack.navigationOptions = {
-  tabBarLabel: 'Settings',
-  tabBarIcon: ({ focused }) => (
-    <TabBarIcon
-      focused={focused}
-      name={Platform.OS === 'ios' ? 'ios-options' : 'md-options'}
-    />
-  ),
+    tabBarLabel: 'Settings',
+    tabBarIcon: ({focused}) => (
+        <TabBarIcon
+            focused={focused}
+            name={Platform.OS === 'ios' ? 'ios-options' : 'md-options'}
+        />
+    ),
 };
 
 export default createBottomTabNavigator({
-  // HomeStack,
-  // LinksStack,
+    // HomeStack,
+    // LinksStack,
+    //   SwiperStack,
     ImageComparisonStack,
     PaperStack,
     SettingsStack,
