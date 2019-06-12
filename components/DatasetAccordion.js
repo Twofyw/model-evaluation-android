@@ -31,7 +31,10 @@ export default class DatasetAccordion extends React.Component {
               <List.Item
                   key={idx}
                   title={DatasetAccordion.capitalize(dataset)}
-                  onPress={() => this.props.handleSetDataset(dataset)}
+                  onPress={() => {
+                    this.props.handleSetDataset(dataset);
+                    this._handlePress();
+                  }}
               />)
         }
       </List.Accordion>

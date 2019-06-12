@@ -17,7 +17,7 @@ export default class SetModeOfImageAccordion extends React.Component {
   render() {
     return (<List.Section>
       <List.Accordion
-          title={'Mode of Image: ' + this.props.mode}
+          title={this.props.mode}
           expanded={this.state.expanded}
           onPress={this._handlePress}
       >
