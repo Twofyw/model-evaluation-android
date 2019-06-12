@@ -1,4 +1,4 @@
-global.datasets = ['road extraction', 'cell isbi 2012'];
+global.datasets = ['deepglobe road extraction', 'massachusetts road extraction', 'cell isbi 2012'];
 global.raw_url = 'http://249.twofyw.me';
 global.port = '10108';
 global.base_url = global.raw_url + ':' + global.port + '/';

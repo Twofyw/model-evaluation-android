@@ -7,7 +7,8 @@ import '../global'
 const cheerio = require('react-native-cheerio');
 
 let dataset_2_dir = {
-    'road extraction': 'road_extraction/',
+    'massachusetts road extraction': 'road_extraction/',
+    'deepglobe road extraction': 'road_extraction/',
     'cell isbi 2012': 'cell_membrance/',
 };
 
@@ -37,12 +38,14 @@ export default class ImageComparisonScreen extends React.Component {
         "D-LinkNet (std)": 'dlinknet_std_diff_loss_1',
     };
     cell_idx = [12, 14, 15, 18, 19, 20, 21, 25, 27, 28, 3, 5, 6, 8, 9,];
+    deepglobe_idx = [...Array(50).keys()];
+    massachusetts_idx = [...Array(50).keys()].map(x => x+50);
 
     state = {
         detailVisible: false,
         idx: 0,
         expanded: false,
-        dataset: 'road extraction',
+        dataset: 'deepglobe road extraction',
         cell_pred_urls: [],
         model: Object.keys(this.score_path_dict)[0],
         tableIdx: 0,
@@ -80,7 +83,15 @@ export default class ImageComparisonScreen extends React.Component {
         const items = [];
         const binaryPath = global.isBinarization? '_binary' : '';
         switch (this.state.dataset) {
-            case 'road extraction':
+            case 'deepglobe road extraction':
+                for (const [idx, [k, v]] of Object.entries(Object.entries(this.score_path_dict))) {
+                    let p_url = global.base_url + dataset_2_dir[this.state.dataset] + "eval_result/" + v + binaryPath +
+                        "/" + this.state.idx.toString() + ".png?a=" + Math.random();
+                    items.push(<Card.Title key={idx} subtitle={'Prediction: ' + k}/>);
+                    items.push(<Card.Cover style={styles.cover} key={-idx - 1} source={{uri: p_url}}/>);
+                }
+                return items;
+            case 'massachusetts road extraction':
                 for (const [idx, [k, v]] of Object.entries(Object.entries(this.score_path_dict))) {
                     let p_url = global.base_url + dataset_2_dir[this.state.dataset] + "eval_result/" + v + binaryPath +
                         "/" + this.state.idx.toString() + ".png?a=" + Math.random();
@@ -109,9 +120,13 @@ export default class ImageComparisonScreen extends React.Component {
         let img_url = '';
         let gt_url = '';
         switch (this.state.dataset) {
-            case 'road extraction':
-                img_url = global.base_url + dataset_2_dir[this.state.dataset] + "DeepGlobe_test/" + this.state.idx.toString() + "_sat.jpg";
-                gt_url = global.base_url + dataset_2_dir[this.state.dataset] + "DeepGlobe_test/" + this.state.idx.toString() + "_mask.png";
+            case 'deepglobe road extraction':
+                img_url = global.base_url + dataset_2_dir[this.state.dataset] + "DeepGlobe_test/" + this.deepglobe_idx[this.state.idx].toString() + "_sat.jpg";
+                gt_url = global.base_url + dataset_2_dir[this.state.dataset] + "DeepGlobe_test/" + this.deepglobe_idx[this.state.idx].toString() + "_mask.png";
+                break;
+            case 'massachusetts road extraction':
+                img_url = global.base_url + dataset_2_dir[this.state.dataset] + "DeepGlobe_test/" + this.massachusetts_idx[this.state.idx].toString() + "_sat.jpg";
+                gt_url = global.base_url + dataset_2_dir[this.state.dataset] + "DeepGlobe_test/" + this.massachusetts_idx[this.state.idx].toString() + "_mask.png";
                 break;
             case 'cell isbi 2012':
                 img_url = global.base_url + dataset_2_dir[this.state.dataset] + "rgb/" + this.cell_idx[this.state.idx].toString() + ".png";
@@ -190,9 +205,11 @@ export default class ImageComparisonScreen extends React.Component {
 
     _renderDetail() {
         let scoresPromise = [];
+        const dataset_idx = this.state.dataset === 'deepglobe road extraction' ? this.deepglobe_idx :
+            this.state.dataset === 'massachusetts road extraction' ? this.massachusetts_idx : this.cell_idx;
         for (const [idx, [modelName, dirName]] of Object.entries(Object.entries(alps_path_dict))) {
             let aplsUrl = global.base_url + dataset_2_dir[this.state.dataset] + '/example_output_ims/' + dirName +
-                '/' + this.state.idx.toString() + "/output.txt";
+                '/' + dataset_idx[this.state.idx].toString() + "/output.txt";
             scoresPromise.push(fetch(aplsUrl));
         }
 

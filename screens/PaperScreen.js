@@ -17,7 +17,7 @@ export default class PaperScreen extends React.Component {
     }
 
     state = {
-        dataset: 'road extraction'
+        dataset: 'deepglobe road extraction'
     };
 
     products = [
@@ -94,7 +94,8 @@ export default class PaperScreen extends React.Component {
 
     renderTable() {
         const std = 0.02;
-        const mult = this.state.dataset === 'cell isbi 2012' ? 1.1 : 1;
+        const mult = this.state.dataset === 'cell isbi 2012' ? 1.1 :
+            this.state.dataset === 'massachusetts road extraction' ? 0.9 : 1;
         return (
             <DataTable>
                 <DataTable.Header>
