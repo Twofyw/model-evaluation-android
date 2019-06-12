@@ -12,14 +12,14 @@ let dataset_2_dir = {
 };
 
 let alps_path_dict = {
-    "U-Net": 'edge_list',
-    "U-Net (diff)": 'edge_list_2',
-    "D-LinkNet": 'edge_dlink',
-    "D-LinkNet (diff)": 'edge_dlink_diff_2',
-    "D-LinkNet (sec)": 'edge_dlink_sec',
-    "D-LinkNet (new)": 'edge_dlinknet_plain_new4',
-    "D-LinkNet (new diff)": 'edge_dlinknet_diff_n0.0005_new4',
-    "D-LinkNet (std)": 'edge_dlinknet_std_diff_loss_1'
+    "U": 'edge_list',
+    "U (diff)": 'edge_list_2',
+    "D": 'edge_dlink',
+    "D (diff)": 'edge_dlink_diff_2',
+    "D (sec)": 'edge_dlink_sec',
+    "D (new)": 'edge_dlinknet_plain_new4',
+    "D (new diff)": 'edge_dlinknet_diff_n0.0005_new4',
+    "D (std)": 'edge_dlinknet_std_diff_loss_1'
 };
 
 export default class ImageComparisonScreen extends React.Component {
@@ -39,7 +39,7 @@ export default class ImageComparisonScreen extends React.Component {
     cell_idx = [12, 14, 15, 18, 19, 20, 21, 25, 27, 28, 3, 5, 6, 8, 9,];
 
     state = {
-        detailVisible: true,
+        detailVisible: false,
         idx: 0,
         expanded: false,
         dataset: 'road extraction',
@@ -99,7 +99,6 @@ export default class ImageComparisonScreen extends React.Component {
     }
 
     _hideModal = () => this.setState({detailVisible: false});
-
     _viewDetail = () => this.setState({detailVisible: true});
 
     renderImages() {
@@ -135,7 +134,6 @@ export default class ImageComparisonScreen extends React.Component {
                 </Card>
 
                 <Portal>
-                    {this.renderFAB()}
                     <Modal visible={detailVisible} onDismiss={this._hideModal}>
                         {this.state.table}
                     </Modal>
@@ -212,7 +210,7 @@ export default class ImageComparisonScreen extends React.Component {
                         </DataTable.Row>
                     )
                 });
-                if (this.state.table.length === 0 || this.state.tableIdx != this.state.idx) {
+                if (this.state.table.length === 0 || this.state.tableIdx !== this.state.idx) {
                     this.setState({
                         tableIdx: this.state.idx,
                         table: (
@@ -230,7 +228,7 @@ export default class ImageComparisonScreen extends React.Component {
                         )
                     });
                 }
-            }))
+            }));
     }
 }
 
