@@ -96,53 +96,55 @@ export default class PaperScreen extends React.Component {
         })
     };
 
-
     renderTable() {
         const std = 0.02;
         const mult = this.state.dataset === 'cell isbi 2012' ? 1.1 :
             this.state.dataset === 'massachusetts road extraction' ? 0.9 : 1;
         return (
-            <DataTable>
-                <DataTable.Header>
-                    <DataTable.Title>Topological (APLS)</DataTable.Title>
-                    <DataTable.Title numeric>P over GT</DataTable.Title>
-                    <DataTable.Title numeric>GT over P</DataTable.Title>
-                    <DataTable.Title numeric>Overall</DataTable.Title>
-                </DataTable.Header>
-                {this.products.map(
-                    ({name, apls_p_gt, apls_gt_p, apls}, i) => {
-                        apls_p_gt = deviateNumber(apls_p_gt, std, mult);
-                        apls_gt_p = deviateNumber(apls_gt_p, std, mult);
-                        apls = deviateNumber(apls, std, mult);
-                        return (<DataTable.Row key={i}>
+            <View>
+                <DataTable>
+                    <DataTable.Header>
+                        <DataTable.Title>Topological (APLS)</DataTable.Title>
+                        {cellSwitch(<DataTable.Title numeric>P over GT</DataTable.Title>, global.checked[0])}
+                        {cellSwitch(<DataTable.Title numeric>GT over P</DataTable.Title>, global.checked[1])}
+                        {cellSwitch(<DataTable.Title numeric>Overall</DataTable.Title>, global.checked[2])}
+                    </DataTable.Header>
+                    {this.products.map(
+                        ({name, apls_p_gt, apls_gt_p, apls}, i) => {
+                            apls_p_gt = deviateNumber(apls_p_gt, std, mult);
+                            apls_gt_p = deviateNumber(apls_gt_p, std, mult);
+                            apls = deviateNumber(apls, std, mult);
+                            return (<DataTable.Row key={i}>
+                                    <DataTable.Cell>{name}</DataTable.Cell>
+                                    {cellSwitch(<DataTable.Cell numeric>{apls_p_gt.toFixed(2)}</DataTable.Cell>, global.checked[0])}
+                                    {cellSwitch(<DataTable.Cell numeric>{apls_gt_p.toFixed(2)}</DataTable.Cell>, global.checked[1])}
+                                    {cellSwitch(<DataTable.Cell numeric>{apls.toFixed(2)}</DataTable.Cell>, global.checked[2])}
+                                </DataTable.Row>
+                            );
+                        })}
+                </DataTable>
+                <DataTable>
+                    <DataTable.Header>
+                        <DataTable.Title>Pixel</DataTable.Title>
+                        {cellSwitch(<DataTable.Title numeric>IoU</DataTable.Title>, global.checked[3])}
+                        {cellSwitch(<DataTable.Title numeric>Precision</DataTable.Title>, global.checked[4])}
+                        {cellSwitch(<DataTable.Title numeric>Recall</DataTable.Title>, global.checked[5])}
+                    </DataTable.Header>
+                    {this.products.map(
+                        ({name, iou, precision, recall}, i) => {
+                            iou = deviateNumber(iou, std, mult);
+                            precision = deviateNumber(precision, std, mult);
+                            recall = deviateNumber(recall, std, mult);
+                            return (<DataTable.Row key={i}>
                                 <DataTable.Cell>{name}</DataTable.Cell>
-                                {cellSwitch(<DataTable.Cell numeric>{apls_p_gt.toFixed(2)}</DataTable.Cell>, global.checked[0])}
-                                {cellSwitch(<DataTable.Cell numeric>{apls_gt_p.toFixed(2)}</DataTable.Cell>, global.checked[1])}
-                                {cellSwitch(<DataTable.Cell numeric>{apls.toFixed(2)}</DataTable.Cell>, global.checked[2])}
-                            </DataTable.Row>
-                        );
-                    })}
-
-                <DataTable.Header>
-                    <DataTable.Title>Pixel</DataTable.Title>
-                    <DataTable.Title numeric>IoU</DataTable.Title>
-                    <DataTable.Title numeric>Precision</DataTable.Title>
-                    <DataTable.Title numeric>Recall</DataTable.Title>
-                </DataTable.Header>
-                {this.products.map(
-                    ({name, iou, precision, recall}, i) => {
-                        iou = deviateNumber(iou, std, mult);
-                        precision = deviateNumber(precision, std, mult);
-                        recall = deviateNumber(recall, std, mult);
-                        return (<DataTable.Row key={i}>
-                            <DataTable.Cell>{name}</DataTable.Cell>
                                 {cellSwitch(<DataTable.Cell numeric>{iou.toFixed(2)}</DataTable.Cell>, global.checked[3])}
                                 {cellSwitch(<DataTable.Cell numeric>{precision.toFixed(2)}</DataTable.Cell>, global.checked[4])}
                                 {cellSwitch(<DataTable.Cell numeric>{recall.toFixed(2)}</DataTable.Cell>, global.checked[5])}
-                        </DataTable.Row>);
-                    }
-                )}
-            </DataTable>
+                            </DataTable.Row>);
+                        }
+                    )}
+                </DataTable>
+            </View>
         );
     }
 
