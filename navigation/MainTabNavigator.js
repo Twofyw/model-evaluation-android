@@ -37,7 +37,7 @@ ImageComparisonStack.navigationOptions = {
     tabBarIcon: ({focused}) => (
         <TabBarIcon
             focused={focused}
-            name={Platform.OS === 'ios' ? 'ios-link' : 'md-eye'}
+            name={Platform.OS === 'ios' ? 'ios-eye' : 'md-eye'}
             // name={'visibility'}
         />
     ),
@@ -80,7 +80,7 @@ PaperStack.navigationOptions = {
     tabBarIcon: ({focused}) => (
         <TabBarIcon
             focused={focused}
-            name={Platform.OS === 'ios' ? 'ios-options' : 'md-code'}
+            name={Platform.OS === 'ios' ? 'ios-archive' : 'md-archive'}
         />
     ),
 };
@@ -94,7 +94,7 @@ SettingsStack.navigationOptions = {
     tabBarIcon: ({focused}) => (
         <TabBarIcon
             focused={focused}
-            name={Platform.OS === 'ios' ? 'ios-options' : 'md-options'}
+            name={Platform.OS === 'ios' ? 'ios-settings' : 'md-settings'}
         />
     ),
 };
