@@ -37,7 +37,7 @@ ImageComparisonStack.navigationOptions = {
     tabBarIcon: ({focused}) => (
         <TabBarIcon
             focused={focused}
-            name={Platform.OS === 'ios' ? 'ios-link' : 'md-eye'}
+            name={Platform.OS === 'ios' ? 'ios-eye' : 'md-eye'}
             // name={'visibility'}
         />
     ),
