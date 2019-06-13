@@ -1,7 +1,7 @@
 {
   "expo": {
-    "name": "model-evaluation-android-test",
-    "slug": "model-evaluation-android-test",
+    "name": "SatelliteML",
+    "slug": "model-evaluation-app",
     "privacy": "public",
     "sdkVersion": "32.0.0",
     "platforms": [
@@ -25,6 +25,9 @@
     "ios": {
       "supportsTablet": true
     },
-    "description": ""
+    "android": {
+      "package": "com.tongji.satelliteml"
+    },
+    "description": "A course project work for Android Application Development."
   }
 }
